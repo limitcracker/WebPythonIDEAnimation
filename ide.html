@@ -233,19 +233,28 @@ def update(time):
     draw_stats(ctx, ball)
     window.requestAnimationFrame(update)
 
+def reset_code(evt=None):
+    global ball
+    ball = BouncingBall()  # Create fresh ball instance
+    write_to_console("Reset ball position and properties")
+
 def run_code(evt=None):
     try:
+        # Clear console and reset ball
         document["output-console"].innerHTML = ""
+        reset_code()  # Reset ball before running new code
+        
+        # Clear any existing intervals
+        from browser import timer
+        timer.clear_interval()
+        timer.clear_timeout()
+        
+        # Run new code
         code = window.editor.getValue()
         exec(code)
         write_to_console("Code executed successfully!")
     except Exception as e:
         write_to_console(f"Error: {str(e)}")
-
-def reset_code(evt=None):
-    global ball
-    ball = BouncingBall()
-    write_to_console("Reset ball position and properties")
 
 # Bind buttons
 document["run-button"].bind("click", run_code)
