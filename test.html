@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Brython Test</title>
+    <script src="brython.js"></script>
+    <script src="brython_stdlib.js"></script>
+</head>
+<body onload="brython()">
+    <h1>Brython Test</h1>
+    <div id="output"></div>
+
+    <script type="text/python">
+from browser import document
+document["output"].innerHTML = "Hello from Brython!"
+    </script>
+</body>
+</html>
